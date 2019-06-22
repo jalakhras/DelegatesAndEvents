@@ -14,8 +14,13 @@ namespace DelegatesAndEvents
         {
             WorkPerformedHandler del1 = new WorkPerformedHandler(WorkPerformed1);
             WorkPerformedHandler del2 = new WorkPerformedHandler(WorkPerformed2);
-            del1(5, WorkType.Golf);
-            del2(10, WorkType.GenerateReports);
+            DoWork(del1);
+            DoWork(del2);
+        }
+
+        static void DoWork(WorkPerformedHandler del)
+        {
+            del(5, WorkType.Golf);
         }
 
         static void WorkPerformed1(int hours, WorkType workType)
