@@ -14,8 +14,10 @@ namespace DelegatesAndEvents
         {
             WorkPerformedHandler del1 = new WorkPerformedHandler(WorkPerformed1);
             WorkPerformedHandler del2 = new WorkPerformedHandler(WorkPerformed2);
-            DoWork(del1);
-            DoWork(del2);
+            WorkPerformedHandler del3 = new WorkPerformedHandler(WorkPerformed3);
+            del1 += del2+ del3; 
+            del1(5, WorkType.Golf);
+
         }
 
         static void DoWork(WorkPerformedHandler del)
@@ -30,6 +32,10 @@ namespace DelegatesAndEvents
         static void WorkPerformed2(int hours, WorkType workType)
         {
             Console.WriteLine("Work Performed 2  Called "+ hours.ToString());
+        }
+        static void WorkPerformed3(int hours, WorkType workType)
+        {
+            Console.WriteLine("Work Performed 3  Called "+ hours.ToString());
         }
     }
 
