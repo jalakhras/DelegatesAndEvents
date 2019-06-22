@@ -6,16 +6,33 @@ using System.Threading.Tasks;
 
 namespace DelegatesAndEvents
 {
+
+    public delegate void WorkPerformedHandler(int hours, WorkType workType); 
     class Program
     {
         static void Main(string[] args)
         {
-            // The code provided will print ‘Hello World’ to the console.
-            // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            WorkPerformedHandler del1 = new WorkPerformedHandler(WorkPerformed1);
+            WorkPerformedHandler del2 = new WorkPerformedHandler(WorkPerformed2);
+            del1(5, WorkType.Golf);
+            del2(10, WorkType.GenerateReports);
+        }
 
-            // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
+        static void WorkPerformed1(int hours, WorkType workType)
+        {
+            Console.WriteLine("Work Performed 1 Called " + hours.ToString());
+        }
+        static void WorkPerformed2(int hours, WorkType workType)
+        {
+            Console.WriteLine("Work Performed 2  Called "+ hours.ToString());
         }
     }
+
+    public enum WorkType
+    {
+        GoToMeetings,
+        Golf,
+        GenerateReports
+    }
+
 }
