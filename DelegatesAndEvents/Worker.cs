@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DelegatesAndEvents
 {
 
-    public delegate int WorkPerformedHandler(int hours, WorkType workType);
+    //public delegate int WorkPerformedHandler(object sender, WorkPerformedEventArgs e);
     public class Worker
     {
-        public event WorkPerformedHandler WorkPerformed;
-        public event EventHandler WorkCompleted; 
-        public void DoWork(int hours , WorkType workType)
+        public event EventHandler<WorkPerformedEventArgs> WorkPerformed;
+        public event EventHandler WorkCompleted;
+        public void DoWork(int hours, WorkType workType)
         {
             for (int i = 0; i < hours; i++)
             {
@@ -21,21 +17,21 @@ namespace DelegatesAndEvents
             OnWorkCompleted();
         }
 
-        private void OnWorkPerformed (int hours , WorkType workType)
-        { 
+        private void OnWorkPerformed(int hours, WorkType workType)
+        {
 
-            var del = WorkPerformed as WorkPerformedHandler;
+            var del = WorkPerformed as EventHandler<WorkPerformedEventArgs>;
             if (del != null)
             {
-                del(hours, workType);
+                del(this, new WorkPerformedEventArgs(hours, workType));
             }
 
         }
 
         private void OnWorkCompleted()
-        { 
+        {
 
-            var del = WorkCompleted as EventHandler;
+            EventHandler del = WorkCompleted as EventHandler;
             if (del != null)
             {
                 del(this, EventArgs.Empty);
