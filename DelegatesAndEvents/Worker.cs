@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace DelegatesAndEvents
 {
@@ -12,6 +13,7 @@ namespace DelegatesAndEvents
         {
             for (int i = 0; i < hours; i++)
             {
+                Thread.Sleep(1000);
                 OnWorkPerformed(i + 1, workType);
             }
             OnWorkCompleted();

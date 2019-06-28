@@ -14,9 +14,19 @@ namespace DelegatesAndEvents
             //int finalHours = del1(5, WorkType.Golf);
             //Console.WriteLine("final Hours : " + finalHours.ToString());
             Worker worker = new Worker();
-
+            worker.WorkPerformed += new EventHandler<WorkPerformedEventArgs>(worker_WorkPerformed);
+            worker.WorkPerformed += new EventHandler<WorkPerformedEventArgs>(worker_WorkComplate);
+            worker.DoWork(8, WorkType.GenerateReports);
         }
 
+        static void worker_WorkPerformed(object sender  , WorkPerformedEventArgs eventArgs)
+        {
+            Console.WriteLine("Houres Worked : "+eventArgs.Hours + " " + eventArgs.WorkType);
+        }
+        static void worker_WorkComplate(object sender  , WorkPerformedEventArgs eventArgs)
+        {
+            Console.WriteLine("Worker is Done");
+        }
         //static void DoWork(WorkPerformedHandler del)
         //{
         //    del(5, WorkType.Golf);
