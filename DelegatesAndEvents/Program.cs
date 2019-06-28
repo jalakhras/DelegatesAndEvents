@@ -15,7 +15,7 @@ namespace DelegatesAndEvents
             //Console.WriteLine("final Hours : " + finalHours.ToString());
             Worker worker = new Worker();
             worker.WorkPerformed += new EventHandler<WorkPerformedEventArgs>(worker_WorkPerformed);
-            worker.WorkPerformed += new EventHandler<WorkPerformedEventArgs>(worker_WorkComplate);
+            worker.WorkCompleted += new EventHandler(worker_WorkComplate);
             worker.DoWork(8, WorkType.GenerateReports);
         }
 
@@ -23,7 +23,7 @@ namespace DelegatesAndEvents
         {
             Console.WriteLine("Houres Worked : "+eventArgs.Hours + " " + eventArgs.WorkType);
         }
-        static void worker_WorkComplate(object sender  , WorkPerformedEventArgs eventArgs)
+        static void worker_WorkComplate(object sender  , EventArgs eventArgs)
         {
             Console.WriteLine("Worker is Done");
         }
